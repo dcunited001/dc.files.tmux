@@ -1,0 +1,96 @@
+# http://www.drbunsen.org/text-triumvirate.html
+set-option -g default-shell $SHELL
+set -g default-command "reattach-to-user-namespace -l zsh"
+
+#make tmux pass keys thru
+set-window-option -g xterm-keys on
+
+#mouse opts
+set -g mode-mouse on
+setw -g mouse-select-window on
+setw -g mouse-select-pane on
+
+setw -g mode-keys vi
+bind ` copy-mode
+unbind [
+unbind p
+bind p paste-buffer
+bind -t vi-copy v begin-selection
+bind -t vi-copy y copy-selection
+bind -t vi-copy Escape cancel
+bind y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+
+# http://nils-blum-oeste.net/getting-started-with-tmux/#.UJAIZ2l25NF
+
+# act like vim
+#setw -g mode-keys vi
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+bind-key -r C-h select-window -t :-
+bind-key -r C-l select-window -t :+
+
+# act like GNU screen
+unbind C-b
+set -g prefix C-a
+
+# look good
+set -g default-terminal "xterm-256color"
+
+
+
+
+#to enable vim mode
+#set-window-option -g mode-keys vi
+#list-keys -t vi-copy #list keys
+
+#need to enable other keys
+#bind-key -t vi-copy 'v' begin-selection
+#bind-key -t vi-copy 'y' copy-selection
+#
+#Function                     vi              emacs
+#Back to indentation          ^               M-m
+#Bottom of history            G               M-<
+#Clear selection              Escape          C-g
+#Copy selection               Enter           M-w
+#Cursor down                  j               Down
+#Cursor left                  h               Left
+#Cursor right                 l               Right
+#Cursor to bottom line        L
+#Cursor to middle line        M               M-r
+#Cursor to top line           H               M-R
+#Cursor up                    k               Up
+#Delete entire line           d               C-u
+#Delete/Copy to end of line   D               C-k
+#End of line                  $               C-e
+#Go to line                   :               g
+#Half page down               C-d             M-Down
+#Half page up                 C-u             M-Up
+#Jump forward                 f               f
+#Jump to forward              t
+#Jump backward                F               F
+#Jump to backward             T
+#Jump again                   ;               ;
+#Jump again in reverse        ,               ,
+#Next page                    C-f             Page down
+#Next space                   W
+#Next space, end of word      E
+#Next word                    w
+#Next word end                e               M-f
+#Paste buffer                 p               C-y
+#Previous page                C-b             Page up
+#Previous word                b               M-b
+#Previous space               B
+#Quit mode                    q               Escape
+#Rectangle toggle             v               R
+#Scroll down                  C-Down or C-e   C-Down
+#Scroll up                    C-Up or C-y     C-Up
+#Search again                 n               n
+#Search again in reverse      N               N
+#Search backward              ?               C-r
+#Search forward               /               C-s
+#Start of line                0               C-a
+#Start selection              Space           C-Space
+#Top of history               g               M->
+#Transpose chars                              C-t
